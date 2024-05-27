@@ -1,0 +1,29 @@
+
+<div class="background-login">
+  <div class="box">
+    <div class="left-side">
+      <div class="login-box">
+        <h1 class="firsth1">TaxiFleet</h1>
+        <h1 class="secondh1">Manager</h1>
+        <form  method="post">
+
+          <div class="textbox">
+            <input [(ngModel)]="authRequest.username" type="text" name="username" placeholder="Username" required>
+          </div>
+          <div class="textbox">
+            <input [(ngModel)]="authRequest.password" type="password" name="password" placeholder="Password" required>
+          </div>
+          <button (click)="login()" type="button" class="btn">
+            Login
+          </button>
+        </form>
+        <a routerLink="/register" class="sign-in">Sign Up</a>
+      </div>
+    </div>
+    <div class="right-side">
+      <img src="assets/images/taxi.png">
+    </div>
+  </div>
+</div>
+
+

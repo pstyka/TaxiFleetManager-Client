@@ -1,0 +1,49 @@
+<div class="container">
+  <table class="schedule-table">
+    <thead>
+    <tr>
+      <th class="centered-cell">L.p.</th>
+      <th class="centered-cell">Rejestracja</th>
+      <th class="centered-cell">Marka</th>
+      <th class="centered-cell">Model</th>
+      <th *ngFor="let weekDate of weekDates">
+        <div class="date-container">
+          <div class="date">{{ weekDate.date }}</div>
+          <div class="separator"></div>
+          <div class="day">{{ weekDate.day }}</div>
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let car of cars; let i = index">
+      <td class="centered-cell">{{ i + 1 }}</td>
+      <td class="centered-cell">{{ car.registrationNumber }}</td>
+      <td class="centered-cell">{{ car.brand }}</td>
+      <td class="centered-cell">{{ car.model }}</td>
+      <td *ngFor="let weekDate of weekDates">
+        <div class="shift-container">
+          <div *ngIf="getScheduleForDate(car, weekDate.date, 'FULL_DAY').length > 0" class="shift full-day-shift">
+            <div class="shift-type">FULL DAY</div>
+            <ng-container *ngFor="let schedule of getScheduleForDate(car, weekDate.date, 'FULL_DAY')">
+              {{ schedule.firstName }} {{ schedule.lastName }}
+            </ng-container>
+          </div>
+          <div *ngIf="getScheduleForDate(car, weekDate.date, 'DAY').length > 0 && getScheduleForDate(car, weekDate.date, 'FULL_DAY').length === 0" class="shift day-shift">
+            <div class="shift-type">DAY</div>
+            <ng-container *ngFor="let schedule of getScheduleForDate(car, weekDate.date, 'DAY')">
+              {{ schedule.firstName }} {{ schedule.lastName }}
+            </ng-container>
+          </div>
+          <div *ngIf="getScheduleForDate(car, weekDate.date, 'NIGHT').length > 0 && getScheduleForDate(car, weekDate.date, 'FULL_DAY').length === 0" class="shift night-shift">
+            <div class="shift-type">NIGHT</div>
+            <ng-container *ngFor="let schedule of getScheduleForDate(car, weekDate.date, 'NIGHT')">
+              {{ schedule.firstName }} {{ schedule.lastName }}
+            </ng-container>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

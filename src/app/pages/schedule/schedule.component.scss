@@ -1,0 +1,98 @@
+.container {
+  margin: 20px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  transform: translateX(-100px);
+}
+
+.schedule-table th, .schedule-table td {
+  border: 1px solid black;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.schedule-table th {
+  background-color: #f2f2f2;
+}
+
+.schedule-table td {
+  background-color: #ffffff;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.separator {
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 4px;
+}
+
+.day {
+  font-style: italic;
+}
+
+.shift-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+}
+
+.shift {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
+.shift-type {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.day-shift {
+  background-color: rgba(255, 223, 186, 0.5);
+  border-bottom: 1px solid black;
+}
+
+.night-shift {
+  background-color: rgba(173, 216, 230, 0.5);
+}
+
+.full-day-shift {
+  background-color: rgba(144, 238, 144, 0.5); /* Light green color for full day shift */
+  height: 100%; /* Ensure it takes the full height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center the content of registration, brand, and model columns */
+.schedule-table th:nth-child(1),
+.schedule-table th:nth-child(2),
+.schedule-table th:nth-child(3),
+.schedule-table th:nth-child(4),
+.schedule-table td:nth-child(1),
+.schedule-table td:nth-child(2),
+.schedule-table td:nth-child(3),
+.schedule-table td:nth-child(4) {
+  text-align: center;
+  vertical-align: middle;
+}

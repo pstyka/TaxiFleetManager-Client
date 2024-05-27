@@ -1,0 +1,39 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+
+.background-login{
+  background-image: url("assets/images/background2.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+body, html{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+.background {
+  background-image: url("assets/images/background.jpg");
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
