@@ -1,0 +1,28 @@
+<div class="cars-container">
+  <div *ngFor="let car of cars" class="car">
+    <div class="car-info">
+      <div class="name">
+        <h1>{{ car.brand }}</h1>
+        <h2>{{ car.model }}</h2>
+      </div>
+      <div class="data">
+        <div class="numbers">
+          <div class="production-year">{{ car.productionYear }}</div>
+          <div class="mileage">{{ car.mileage }} km</div>
+        </div>
+        <div class="colors">
+          <div class="color">Color:
+            <div class="circle1" [style.background]="car.color"></div>
+          </div>
+          <div class="wheel-state">Wheel state:
+            <div class="circle2" [style.background]="car.wheelState"></div>
+          </div>
+        </div>
+      </div>
+      <div class="registration-number">{{ car.registrationNumber }}</div>
+    </div>
+    <img class="photo" [src]="car.imageUrl" alt="{{ car.brand }} {{ car.model }}">
+  </div>
+</div>
+
+

@@ -1,0 +1,41 @@
+<div class="background">
+  <div class="left">
+    <div class="logo">
+      <h1 class="firsth1">TaxiFleet</h1>
+      <h1 class="secondh1">Manager</h1>
+    </div>
+    <div class="option-box">
+      <button routerLink="/dashboard/availability">
+        <a>Report </a>
+        <a>availability</a>
+      </button>
+      <button routerLink="/dashboard/profile">
+        <a>Profile</a>
+      </button>
+      <button routerLink="/dashboard/cars">
+        <a>Cars</a>
+      </button>
+      <button routerLink="/dashboard/drivers">
+        <a>Drivers</a>
+      </button>
+      <button routerLink="/dashboard/schedule">
+        <a>Schedule</a>
+      </button>
+      <button class="logout-button" (click)="logout()">
+        <a>Logout</a>
+      </button>
+    </div>
+  </div>
+  <div class="right">
+    <form class="search">
+      search:
+    </form>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</div>
+
+
+
+
