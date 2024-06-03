@@ -41,6 +41,7 @@ import { DeleteCarDialogComponent } from './pages/dialogs/delete-car-dialog/dele
 import { DeleteDriverDialogComponent } from './pages/dialogs/delete-driver-dialog/delete-driver-dialog.component';
 import {EditCarDialogComponent} from "./pages/dialogs/edit-car-dialog/edit-car-dialog.component";
 import { AddToScheduleDialogComponent } from './pages/dialogs/add-to-schedule-dialog/add-to-schedule-dialog.component';
+import { AccesDeniedComponent } from './pages/acces-denied/acces-denied.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { AddToScheduleDialogComponent } from './pages/dialogs/add-to-schedule-di
     DeleteCarDialogComponent,
     DeleteDriverDialogComponent,
     EditCarDialogComponent,
-    AddToScheduleDialogComponent
+    AddToScheduleDialogComponent,
+    AccesDeniedComponent
   ],
   imports: [
     BrowserModule,

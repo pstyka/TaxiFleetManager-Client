@@ -9,6 +9,7 @@ import {DeleteCarDialogComponent} from "../dialogs/delete-car-dialog/delete-car-
 import {DeleteDriverDialogComponent} from "../dialogs/delete-driver-dialog/delete-driver-dialog.component";
 import {EditCarDialogComponent} from "../dialogs/edit-car-dialog/edit-car-dialog.component";
 import {AddToScheduleDialogComponent} from "../dialogs/add-to-schedule-dialog/add-to-schedule-dialog.component";
+import {AuthService} from "../../services/auth/auth.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {AddToScheduleDialogComponent} from "../dialogs/add-to-schedule-dialog/ad
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private authService: AuthService) {}
 
   openDialog(dialogComponent: any): void {
     const dialogRef = this.dialog.open(dialogComponent, {
@@ -30,6 +31,9 @@ export class AdminComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+  logout(): void {
+    this.authService.logout();
   }
 
   protected readonly AddCarDialogComponent = AddCarDialogComponent;

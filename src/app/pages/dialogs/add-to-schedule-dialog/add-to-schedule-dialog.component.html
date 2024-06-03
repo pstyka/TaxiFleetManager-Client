@@ -2,23 +2,23 @@
 <div mat-dialog-content>
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>User ID</mat-label>
-      <mat-select formControlName="userId">
-        <mat-option *ngFor="let user of users" [value]="user.id">
-          {{ user.id }}
+      <mat-label>User Name</mat-label>
+      <mat-select formControlName="userName">
+        <mat-option *ngFor="let user of users" [value]="user.firstName + ' ' + user.lastName">
+          {{ user.firstName }} {{ user.lastName }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="scheduleForm.get('userId')?.hasError('required')">User ID is required</mat-error>
+      <mat-error *ngIf="scheduleForm.get('userName')?.hasError('required')">User Name is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Car ID</mat-label>
-      <mat-select formControlName="carId">
-        <mat-option *ngFor="let car of cars" [value]="car.id">
-          {{ car.id }}
+      <mat-label>Car Registration</mat-label>
+      <mat-select formControlName="carRegistration">
+        <mat-option *ngFor="let car of cars" [value]="car.registrationNumber">
+          {{ car.registrationNumber }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="scheduleForm.get('carId')?.hasError('required')">Car ID is required</mat-error>
+      <mat-error *ngIf="scheduleForm.get('carRegistration')?.hasError('required')">Car Registration is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">

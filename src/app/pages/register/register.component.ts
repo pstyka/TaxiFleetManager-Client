@@ -56,7 +56,8 @@ export class RegisterComponent {
       username: this.registerForm.value.username,
       password: this.registerForm.value.password,
       firstName: this.registerForm.value.firstName,
-      lastName: this.registerForm.value.lastName
+      lastName: this.registerForm.value.lastName,
+      phoneNumber: this.registerForm.value.phoneNumber
     };
 
     this.authService.register(registerRequest).subscribe({

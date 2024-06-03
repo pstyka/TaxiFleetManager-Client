@@ -6,6 +6,7 @@
       <p>{{ user.lastName }}</p>
       <p> </p>
       <p>+48 {{ user.phoneNumber }}</p>
+      <p>{{user.role}}</p>
     </div>
     <div class="profile-picture">
       <img class="photo" [src]="user.imgUrl ? user.imgUrl : 'assets/images/profile.png'" alt="User Photo">

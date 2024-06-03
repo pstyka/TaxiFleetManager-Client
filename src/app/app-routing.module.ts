@@ -10,6 +10,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ReportAvailabilityComponent } from './pages/report-availability/report-availability.component';
 import {AuthGuard} from "./services/auth.guard";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {AuthRoleGuard} from "./services/auth-role.guard";
+import {AccesDeniedComponent} from "./pages/acces-denied/acces-denied.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +30,15 @@ const routes: Routes = [
       { path: 'availability', component: ReportAvailabilityComponent },
     ]
   },
-  { path: 'admin', component: AdminComponent}
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthRoleGuard]
+  },
+  {
+    path: 'access-denied',
+    component: AccesDeniedComponent
+  },
 ];
 
 @NgModule({
