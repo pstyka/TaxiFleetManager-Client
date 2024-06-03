@@ -1,9 +1,9 @@
 <div class="cars-container">
-  <div *ngFor="let car of cars" class="car">
+  <div *ngFor="let car of filteredCars" class="car">
     <div class="car-info">
       <div class="name">
-        <h1>{{ car.brand }}</h1>
-        <h2>{{ car.model }}</h2>
+        <h1>{{ car.brand }} - {{ car.model }}</h1>
+        <h2></h2>
       </div>
       <div class="data">
         <div class="numbers">
@@ -21,8 +21,8 @@
       </div>
       <div class="registration-number">{{ car.registrationNumber }}</div>
     </div>
-    <img class="photo" [src]="car.imageUrl" alt="{{ car.brand }} {{ car.model }}">
+    <div class="car-photo">
+      <img class="photo" [src]="car.imageUrl" alt="{{ car.brand }} {{ car.model }}">
+    </div>
   </div>
 </div>
-
-

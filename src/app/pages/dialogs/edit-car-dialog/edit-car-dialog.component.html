@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Edit Car</h1>
+<div mat-dialog-content>
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+    <ng-container *ngIf="!isIdEntered; else carDetails">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Car ID</mat-label>
+        <input matInput formControlName="id" (change)="fetchCar()">
+        <mat-error *ngIf="carForm.get('id')?.hasError('required')">Car ID is required</mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-template #carDetails>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Brand</mat-label>
+        <input matInput formControlName="brand">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="model">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Registration Number</mat-label>
+        <input matInput formControlName="registrationNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Color</mat-label>
+        <input matInput formControlName="color">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Production Year</mat-label>
+        <input matInput formControlName="productionYear">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Mileage</mat-label>
+        <input matInput formControlName="mileage">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="imageUrl">
+      </mat-form-field>
+
+      <div mat-dialog-actions class="button-group">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">Update Car</button>
+      </div>
+    </ng-template>
+  </form>
+</div>

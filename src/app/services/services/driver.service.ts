@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {HttpClient, HttpContext, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpContext, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,6 +24,8 @@ import {TokenService} from "../token/token.service";
 
 @Injectable({ providedIn: 'root' })
 export class DriverService extends BaseService {
+  private readonly apiUrl = `${this.config.rootUrl}/api/v1/driver`;
+
   constructor(config: ApiConfiguration, http: HttpClient, private tokenService: TokenService) {
     super(config, http);
   }
@@ -87,36 +89,46 @@ export class DriverService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteDriver$Response(params: DeleteDriver$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return deleteDriver(this.http, this.rootUrl, params, context);
+  deleteDriver$Response(params: DeleteDriver$Params, context?: HttpContext): Observable<HttpResponse<string>> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.apiUrl}/${params.driverId}`;
+    return this.http.delete<string>(url, { headers, observe: 'response' });
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteDriver$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
   deleteDriver(params: DeleteDriver$Params, context?: HttpContext): Observable<string> {
     return this.deleteDriver$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: HttpResponse<string>): string => r.body as string)
     );
   }
 
   /** Path part for operation `getDrivers()` */
+  /** Path part for operation `getDrivers()` */
   static readonly GetDriversPath = '/api/v1/driver';
 
-  getDrivers$Response(params?: GetDrivers$Params, context?: HttpContext): Observable<HttpResponse<Array<UserDto>>> {
+  getDrivers$Response(firstName?: string, lastName?: string, context?: HttpContext): Observable<HttpResponse<Array<UserDto>>> {
     const token = this.tokenService.token;
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.get<Array<UserDto>>(`${this.rootUrl}${DriverService.GetDriversPath}`, { headers, observe: 'response' });
+    let params = new HttpParams()
+    if (firstName) {
+      params = params.append('firstName', firstName);
+    }
+    if (lastName) {
+      params = params.append('lastName', lastName);
+    }
+
+    return this.http.get<Array<UserDto>>(`${this.rootUrl}${DriverService.GetDriversPath}`, { headers, params, observe: 'response' });
   }
 
-  getDrivers(params?: GetDrivers$Params, context?: HttpContext): Observable<Array<UserDto>> {
-    return this.getDrivers$Response(params, context).pipe(
+  getDrivers(firstName?: string, lastName?: string, context?: HttpContext): Observable<Array<UserDto>> {
+    return this.getDrivers$Response(firstName, lastName, context).pipe(
       map((r: HttpResponse<Array<UserDto>>): Array<UserDto> => r.body as Array<UserDto>)
     );
   }

@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { HttpClient, HttpContext } from '@angular/common/http';
+import {HttpClient, HttpContext, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,14 +22,19 @@ export class ProfileControllerService extends BaseService {
   /** Path part for operation `getProfile()` */
   static readonly GetProfilePath = '/api/v1/profile';
 
+
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `getProfile()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getProfile$Response(params?: GetProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
-    return getProfile(this.http, this.rootUrl, params, context);
+  getProfile$Response(params?: any, token?: string): Observable<HttpResponse<UserDto>> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<UserDto>(`${this.rootUrl}${ProfileControllerService.GetProfilePath}`, { headers, observe: 'response' });
   }
 
   /**
@@ -38,9 +43,9 @@ export class ProfileControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getProfile(params?: GetProfile$Params, context?: HttpContext): Observable<UserDto> {
-    return this.getProfile$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
+  getProfile(params?: any, token?: string): Observable<UserDto> {
+    return this.getProfile$Response(params, token).pipe(
+      map((r: HttpResponse<UserDto>): UserDto => r.body as UserDto)
     );
   }
 

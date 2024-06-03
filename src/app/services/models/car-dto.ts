@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface CarDto {
+  id?: string;
   brand: string;
   color: string;
-  id?: string;
   imageUrl: string;
   mileage: number;
   model: string;

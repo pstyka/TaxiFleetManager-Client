@@ -1,38 +1,73 @@
 import { Component } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthenticationRequest} from "../../services/models/authentication-request";
-import {RegistrationRequest} from "../../services/models/registration-request";
-import {Router} from "@angular/router";
-import {AuthService} from "../../services/auth/auth.service";
-import {TokenService} from "../../services/token/token.service";
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { RegistrationRequest } from '../../services/models/registration-request';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     FormsModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
 
-  registerRequest: RegistrationRequest = {username: '', password: '', firstName: '', lastName: ''};
-  errorMsg: Array<string> = [];
+  registerForm: FormGroup;
+  errorMsg: string = '';
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private tokenService: TokenService
-
-  ) {}
+  ) {
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required]
+    });
+  }
 
   loginPage() {
     this.router.navigate(['/login']);
   }
-  register() {
-    //TODO: Add implementation and routing to the login page
-  }
 
+  register() {
+    if (this.registerForm.invalid) {
+      this.errorMsg = 'Please fill out all fields';
+      return;
+    }
+
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+      this.errorMsg = 'Passwords do not match';
+      return;
+    }
+
+    const registerRequest: RegistrationRequest = {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      phoneNumber: this.registerForm.value.phoneNumber
+    };
+
+    this.authService.register(registerRequest).subscribe({
+      next: (response) => {
+        alert('Registration successful');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        this.errorMsg = 'Registration failed: ' + (err.error.message || 'Unknown error');
+      }
+    });
+  }
 }

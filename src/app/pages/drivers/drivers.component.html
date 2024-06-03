@@ -1,6 +1,12 @@
-<div *ngFor="let driver of drivers" class="car">
-  <div class="name">
-    <h1>{{ driver.firstName}}</h1>
-    <h2>{{ driver.lastName}}</h2>
+<div class="drivers-container">
+  <div *ngFor="let driver of drivers" class="driver-card">
+    <div class="driver-info">
+      <h2>{{ driver.firstName }} {{ driver.lastName }}</h2>
+      <p>+48 {{ driver.phoneNumber }}</p>
+    </div>
+    <div class="driver-photo">
+      <img class="photo" [src]="driver.imgUrl ? driver.imgUrl : 'assets/images/profile.png'" alt="User Photo">
+
+    </div>
   </div>
 </div>
