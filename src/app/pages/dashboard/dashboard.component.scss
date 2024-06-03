@@ -1,45 +1,55 @@
 .left{
   display:flex;
   flex-direction: column;
-  align-items: flex-start;
-  width:30%;
-  margin-left:20px
+  align-items: center;
+  width:25%;
+  height: 100vh;
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(172, 172, 172, 0.8));
 
 }
 .option-box{
+  margin-top: 50px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  border: 2px solid;
+
 }
 .option-box button{
-
-  padding: 30px 50px;
+  margin-top: 15px;
   font-size: 25px;
+  width: 300px;
+  height: 50px;
   background-color: #fafafa81;
-  border: none;
+  border: 1px solid black;
   cursor: pointer;
+  border-radius: 10px;
 }
 .option-box button:hover {
-  background-color: #5597d4;
+  background-color: #393939;
+  color: #FFFFFF;
+}
+.option-box button:active a{
+  background-color: #393939;
+  color: #FFFFFF;
 }
 .option-box button a {
   text-decoration: none;
   color: black;
 }
-.logout-button{
-
-  background-color: #fafafa81;
-  font-size: 30px;
-  border: 2px solid;
+.logout{
+  margin-top: 20px;
 }
-.logo{
+.logo-box{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  margin-left: 20px;
+  margin-top: 20px;
   width: 100%;
-
+}
+.logo{
+  width: 80%;
 }
 .firsth1{
   display: flex;
@@ -58,20 +68,57 @@
   margin-bottom: 20px;;
 }
 .right{
-  width: 70%;
-  margin: 20px;
+  flex-grow: 1;
+  padding: 20px;
+  width: 75%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
 }
-.search{
-  border: 2px solid;
-  width: 90%;
-  padding: 5px;
-  border-radius: 20px;
+
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.tab {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  color: white;
+  font-size: 27px;
+  background-color: #2f2f2f;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px white;
+  width: 341px;
+  height: 51px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: #2f2f2f;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px white;
+  width: 341px;
+  height: 51px;
+  margin: 10px;
+}
+
+.search input {
+  border: none;
+  margin: 10px;
+  border-radius: 10px;
+  outline: none;
+  background-color: #2f2f2f;
+  color: white;
+  font-size: 27px;
 }
 .car{
   background-image:linear-gradient(#ffffff,#afafae9f) ;

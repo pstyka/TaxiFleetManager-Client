@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Delete Driver</h1>
+<div mat-dialog-content>
+  <form [formGroup]="deleteDriverForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Driver ID</mat-label>
+      <input matInput formControlName="driverId" placeholder="Enter Driver ID">
+      <mat-error *ngIf="deleteDriverForm.get('driverId')?.hasError('required')">Driver ID is required</mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="button-group">
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="warn" type="submit">Delete Driver</button>
+    </div>
+  </form>
+</div>

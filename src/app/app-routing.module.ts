@@ -9,6 +9,7 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ReportAvailabilityComponent } from './pages/report-availability/report-availability.component';
 import {AuthGuard} from "./services/auth.guard";
+import {AdminComponent} from "./pages/admin/admin.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'availability', component: ReportAvailabilityComponent },
     ]
-  }
+  },
+  { path: 'admin', component: AdminComponent}
 ];
 
 @NgModule({

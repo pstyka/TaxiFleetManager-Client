@@ -1,9 +1,10 @@
 <div class="container">
-  <h1>Report Availability Form</h1>
   <form [formGroup]="availabilityForm" (ngSubmit)="onSubmit()">
     <div formArrayName="days">
       <div *ngFor="let day of days.controls; let i = index" [formGroupName]="i" class="form-group">
         <label [for]="'day' + i">{{ day.get('day')?.value }}</label>
+        <input type="hidden" formControlName="date">
+        <div class="date">{{ day.get('date')?.value }}</div>
         <div class="select-container">
           <select [id]="'shift' + i" formControlName="shift">
             <option value="DAY">Day</option>
@@ -12,8 +13,7 @@
             <option value="NONE">None</option>
           </select>
         </div>
-        <input type="hidden" formControlName="date">
-        <div class="date">{{ day.get('date')?.value }}</div>
+
       </div>
     </div>
     <button type="submit" class="submit-button">Submit</button>

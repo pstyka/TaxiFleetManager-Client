@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Add Car to the Database</h1>
+<div mat-dialog-content>
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      Brand
+      <input matInput formControlName="brand">
+      <mat-error *ngIf="carForm.get('brand')?.hasError('required')">Brand is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Model
+      <input matInput formControlName="model">
+      <mat-error *ngIf="carForm.get('model')?.hasError('required')">Model is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Registration Number
+      <input matInput formControlName="registrationNumber">
+      <mat-error *ngIf="carForm.get('registrationNumber')?.hasError('required')">Registration Number is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Color
+      <input matInput formControlName="color">
+      <mat-error *ngIf="carForm.get('color')?.hasError('required')">Color is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Production Year
+      <input matInput formControlName="productionYear">
+      <mat-error *ngIf="carForm.get('productionYear')?.hasError('required')">Production Year is required</mat-error>
+      <mat-error *ngIf="carForm.get('productionYear')?.hasError('pattern')">Enter a valid year</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Mileage
+      <input matInput formControlName="mileage">
+      <mat-error *ngIf="carForm.get('mileage')?.hasError('required')">Mileage is required</mat-error>
+      <mat-error *ngIf="carForm.get('mileage')?.hasError('pattern')">Enter a valid mileage</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Image URL
+      <input matInput formControlName="imageUrl">
+      <mat-error *ngIf="carForm.get('imageUrl')?.hasError('required')">Image URL is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      Wheel State
+      <mat-select formControlName="wheelState">
+        <mat-option value="GOOD">Good</mat-option>
+        <mat-option value="MEDIUM">Fair</mat-option>
+        <mat-option value="BAD">Poor</mat-option>
+      </mat-select>
+      <mat-error *ngIf="carForm.get('wheelState')?.hasError('required')">Wheel State is required</mat-error>
+    </mat-form-field>
+    <div mat-dialog-actions class="button-group">
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Add Car</button>
+    </div>
+  </form>
+</div>

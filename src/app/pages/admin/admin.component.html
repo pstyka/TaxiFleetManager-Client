@@ -1,0 +1,40 @@
+<div class="admin-container">
+  <div class="header">
+    <div class="logo-box">
+      <img class="logo" src="assets/images/logo2.png" alt="Logo">
+    </div>
+    <div class="admin-panel">
+      <span>Admin Panel</span>
+    </div>
+  </div>
+
+  <div class="menu">
+    <div class="availability">
+    <button (click)="openDialog(AvailabilityDialogComponent)"  class="menu-item active">Drivers availability</button>
+  </div>
+    <div class="schedule">
+      <button (click)="openDialog(AddToScheduleDialogComponent)" class="menu-item">Add to schedule</button>
+      <button (click)="openDialog(ScheduleDialogComponent)" class="menu-item">Schedule</button>
+    </div>
+    <div class="drivers">
+      <button (click)="openDialog(DriverDialogComponent)" class="menu-item">Drivers</button>
+      <button (click)="openDialog(DeleteDriverDialogComponent)" class="menu-item">Delete driver from database</button>
+    </div>
+    <div class="cars">
+      <button (click)="openDialog(CarDialogComponent)" class="menu-item">Cars</button>
+      <button (click)="openDialog(AddCarDialogComponent)" class="menu-item">Add car to the database</button>
+      <button (click)="openDialog(DeleteCarDialogComponent)" class="menu-item">Delete car from database</button>
+      <button (click)="openDialog(EditCarDialogComponent)" class="menu-item">Edit car data</button>
+    </div>
+
+
+
+
+
+
+  </div>
+
+  <div class="logout">
+    <button class="logout-button">Logout</button>
+  </div>
+</div>

@@ -1,8 +1,7 @@
 <div class="background">
   <div class="left">
-    <div class="logo">
-      <h1 class="firsth1">TaxiFleet</h1>
-      <h1 class="secondh1">Manager</h1>
+    <div class="logo-box">
+      <img class="logo" src="assets/images/logo.png">
     </div>
     <div class="option-box">
       <button routerLink="/dashboard/availability">
@@ -21,21 +20,22 @@
       <button routerLink="/dashboard/schedule">
         <a>Schedule</a>
       </button>
-      <button class="logout-button" (click)="logout()">
-        <a>Logout</a>
-      </button>
+      <div class="logout">
+        <button class="logout-button" (click)="logout()">
+          <a>Logout</a>
+        </button>
+      </div>
     </div>
   </div>
   <div class="right">
-    <form class="search">
-      search:
-    </form>
+    <div class="tabs">
+      <div class="tab">{{ tabTitle }}</div>
+      <form class="search">
+        <input type="text" placeholder="Search..." (input)="onSearch($event)">
+      </form>
+    </div>
     <section>
       <router-outlet></router-outlet>
     </section>
   </div>
 </div>
-
-
-
-

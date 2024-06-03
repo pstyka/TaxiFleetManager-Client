@@ -1,56 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
 .box {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: 65%;
-
+  width: 800px;
+  height: 450px;
+  position: absolute;
+  left: 23%;
+  top: 20%;
 
 }
 .left-side{
-  width:50%;
+  width:40%;
   height: 100%;
-  background-color: #679ed2da;
+  background: linear-gradient(to bottom, #FFFFFF, #ACACAC);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 20px 0 0 20px;
-
 }
-.firsth1{
+.login-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
-  margin-bottom: 0px;
+  width: 80%;
+  height: 80%;
+  margin-bottom: 20px;
 }
-.secondh1{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -10px;
-  font-size: 40px;
-  color:#ffd600;
-  margin-bottom: 20px;;
-}
-
-.textbox{
-  width: 100%;
+.textbox {
+  width: 200px;
   height: 40px;
   margin: 5px;
   background-color: #d9d9d9;
-  border: solid 2px black;
+  border: solid 1px black;
   border-radius: 5px;
 }
-.textbox input{
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.textbox input {
   width: 100%;
   height: 100%;
   border: none;
   outline: none;
   background: none;
-  color: white;
+  color: #333;
   font-size: 18px;
   padding-left: 10px;
 }
@@ -59,24 +71,25 @@
   height: 30px;
   margin: 5px;
   background-color: #d9d9d9;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
-  border: solid 2px black;
-  font-size: 18px;
+  border: solid 1px black;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 
 }
-.sign-in{
-  margin: 0px 5px;
-  color: white;
+.sign-up{
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  text-decoration: none;
 }
 .right-side{
   width:60%;
   height: 100%;
-  background-color: #acc1cab8;
+  background: linear-gradient(to left, #FFFFFF, #ACACAC);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,7 +98,6 @@
 
 }
 .right-side img{
-  height: 75%;
-  width: 75%;
-
+  width: 431px;
+  height: 282px;
 }

@@ -37,28 +37,21 @@ export class ScheduleControllerService{
     );
   }
 
-  /** Path part for operation `addToSchedule()` */
   static readonly AddToSchedulePath = '/api/v1/schedule';
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `addToSchedule()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  addToSchedule$Response(params: AddToSchedule$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return addToSchedule(this.http, this.rootUrl, params, context);
+  addToSchedule$Response(params: AddToSchedule$Params, context?: HttpContext): Observable<HttpResponse<string>> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<string>(`${this.rootUrl}${ScheduleControllerService.AddToSchedulePath}`, params.body, { headers, observe: 'response', context });
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `addToSchedule$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
   addToSchedule(params: AddToSchedule$Params, context?: HttpContext): Observable<string> {
     return this.addToSchedule$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: HttpResponse<string>): string => r.body as string)
     );
   }
 

@@ -26,32 +26,25 @@ import { TokenService } from '../token/token.service';
 
 @Injectable({ providedIn: 'root' })
 export class CarService extends BaseService {
+  private readonly apiUrl = `${this.config.rootUrl}/api/v1/car`;
   constructor(config: ApiConfiguration, http: HttpClient, private tokenService: TokenService){
     super(config, http);
   }
 
   /** Path part for operation `getCarById()` */
-  static readonly GetCarByIdPath = '/api/v1/car/{carId}';
+  getCarById$Response(params: GetCarById$Params, context?: HttpContext): Observable<HttpResponse<CarDto>> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getCarById()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getCarById$Response(params: GetCarById$Params, context?: HttpContext): Observable<StrictHttpResponse<CarDto>> {
-    return getCarById(this.http, this.rootUrl, params, context);
+    const url = `${this.apiUrl}/${params.carId}`;
+    return this.http.get<CarDto>(url, { headers, observe: 'response' });
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getCarById$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
   getCarById(params: GetCarById$Params, context?: HttpContext): Observable<CarDto> {
     return this.getCarById$Response(params, context).pipe(
-      map((r: StrictHttpResponse<CarDto>): CarDto => r.body)
+      map((r: HttpResponse<CarDto>): CarDto => r.body as CarDto)
     );
   }
 
@@ -81,61 +74,29 @@ export class CarService extends BaseService {
   }
 
   /** Path part for operation `deleteCar()` */
-  static readonly DeleteCarPath = '/api/v1/car/{carId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteCar()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteCar$Response(params: DeleteCar$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return deleteCar(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteCar$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteCar(params: DeleteCar$Params, context?: HttpContext): Observable<string> {
-    return this.deleteCar$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
-    );
-  }
-
-  /** Path part for operation `updateCarPatchById()` */
   static readonly UpdateCarPatchByIdPath = '/api/v1/car/{carId}';
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `updateCarPatchById()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  updateCarPatchById$Response(params: UpdateCarPatchById$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return updateCarPatchById(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `updateCarPatchById$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
+  /** Path part for operation `updateCarPatchById()` */
   updateCarPatchById(params: UpdateCarPatchById$Params, context?: HttpContext): Observable<string> {
-    return this.updateCarPatchById$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.rootUrl}/api/v1/car/${params.carId}`;
+    return this.http.patch<string>(url, params.body, { headers }).pipe(
+      map((response: any) => response as string)
     );
   }
+
 
   static readonly GetCarsPath = '/api/v1/car';
 
   getCars$Response(params?: GetCars$Params, context?: HttpContext): Observable<HttpResponse<Array<CarDto>>> {
-    const token = this.tokenService.token; // Pobierz token z TokenService
+    const token = this.tokenService.token;
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Dodaj token do nagłówków
+      'Authorization': `Bearer ${token}`
     });
 
     return this.http.get<Array<CarDto>>(`${this.rootUrl}${CarService.GetCarsPath}`, { headers, observe: 'response' });
@@ -147,29 +108,38 @@ export class CarService extends BaseService {
     );
   }
 
-  /** Path part for operation `addCar()` */
-  static readonly AddCarPath = '/api/v1/car';
+  addCar$Response(params: CarDto, context?: HttpContext): Observable<HttpResponse<string>> {
+    const token = this.tokenService.token;
+    console.log('Token:', token); // Dodaj to do debugowania
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
 
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `addCar()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  addCar$Response(params: AddCar$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-    return addCar(this.http, this.rootUrl, params, context);
+    return this.http.post<string>(this.apiUrl, params, { headers, observe: 'response' });
   }
 
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `addCar$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  addCar(params: AddCar$Params, context?: HttpContext): Observable<string> {
+  addCar(params: CarDto, context?: HttpContext): Observable<string> {
     return this.addCar$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: HttpResponse<string>): string => r.body as string)
     );
   }
+  deleteCar$Response(params: DeleteCar$Params, context?: HttpContext): Observable<HttpResponse<string>> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.apiUrl}/${params.carId}`;
+    return this.http.delete<string>(url, { headers, observe: 'response' });
+  }
+
+  deleteCar(params: DeleteCar$Params, context?: HttpContext): Observable<string> {
+    return this.deleteCar$Response(params, context).pipe(
+      map((r: HttpResponse<string>): string => r.body as string)
+    );
+  }
+
 
 }

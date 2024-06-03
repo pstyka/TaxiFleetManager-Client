@@ -1,0 +1,34 @@
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  max-height: 90vh; /* Ustawia maksymalną wysokość na 90% wysokości okna */
+  max-width: 90vw;  /* Ustawia maksymalną szerokość na 90% szerokości okna */
+  transform: translate(-50%, -50%);
+  top: 50% !important;
+  left: 50% !important;
+}
+
+::ng-deep .mat-dialog-title {
+  font-size: 1.5rem; /* Zwiększ rozmiar czcionki dla tytułu dialogu */
+}
+
+::ng-deep .mat-form-field-label {
+  font-size: 1.2rem; /* Zwiększ rozmiar czcionki dla etykiet */
+}

@@ -1,1 +1,16 @@
-<p>profile works!</p>
+<div class="profile-card" *ngIf="user">
+  <h2>TAXI DRIVER</h2>
+  <div class="profile-info">
+    <div class="info-box">
+      <p>{{ user.firstName }}</p>
+      <p>{{ user.lastName }}</p>
+      <p> </p>
+      <p>+48 {{ user.phoneNumber }}</p>
+    </div>
+    <div class="profile-picture">
+      <img class="photo" [src]="user.imgUrl ? user.imgUrl : 'assets/images/profile.png'" alt="User Photo">
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>Add to Schedule</h1>
+<div mat-dialog-content>
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>User ID</mat-label>
+      <mat-select formControlName="userId">
+        <mat-option *ngFor="let user of users" [value]="user.id">
+          {{ user.id }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="scheduleForm.get('userId')?.hasError('required')">User ID is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Car ID</mat-label>
+      <mat-select formControlName="carId">
+        <mat-option *ngFor="let car of cars" [value]="car.id">
+          {{ car.id }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="scheduleForm.get('carId')?.hasError('required')">Car ID is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <mat-select formControlName="date">
+        <mat-option *ngFor="let date of dates" [value]="date">
+          {{ date }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="scheduleForm.get('date')?.hasError('required')">Date is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Day</mat-label>
+      <mat-select formControlName="day">
+        <mat-option *ngFor="let day of days" [value]="day">
+          {{ day }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="scheduleForm.get('day')?.hasError('required')">Day is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Shift</mat-label>
+      <mat-select formControlName="shift">
+        <mat-option *ngFor="let shift of shifts" [value]="shift">
+          {{ shift }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="scheduleForm.get('shift')?.hasError('required')">Shift is required</mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="button-group">
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Add to Schedule</button>
+    </div>
+  </form>
+</div>
